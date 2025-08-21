@@ -1,0 +1,21 @@
+python main.py --src ./inbox --dst ./sorted --mode move
+
+📌 Pjesët e komandës
+
+    python main.py
+    Thotë që të ekzekutohet programi kryesor main.py.
+
+    --src ./inbox
+    Folderi burim (source).
+    Këtu i vendos file-t që do të organizohen. Në këtë shembull, folderi quhet inbox.
+
+    --dst ./sorted
+    Folderi destinacion (output).
+    Programi do të krijojë nën-folde këtu (p.sh. sipas extension ose datës) dhe do t’i vendosë aty file-t. Në këtë shembull quhet sorted.
+
+    --mode move
+    Çfarë të bëjë me file-t:
+
+        move 👉 i lëviz (pra nuk mbeten në inbox, zhvendosen).
+
+        copy 👉 i kopjon (origjinalet mbeten, duplikatet futen në sorted).
