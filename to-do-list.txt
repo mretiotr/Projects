@@ -1,0 +1,3 @@
+python to-do-list.py add "buy milk"
+python to-do-list.py list
+python to-do-list.py done 1
