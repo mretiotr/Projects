@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In - Rocket Food</title>
+  <link rel="stylesheet" href="signin.css" />
+  <link rel="icon" type="image/png" href="ROCKET.png">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="ROCKET.png" alt="logo" />
+        <span>ROCKET FOOD</span>
+      </a>
+
+      <div class="menu-toggle">&#9776;</div>
+
+      <ul class="nav-links">
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="restaurants.html">Restaurants</a></li>
+        <li><a href="delivery.html">Delivery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+      </ul>
+
+      <div class="auth-buttons">
+        <a href="signin.html" class="sign-in">Sign In</a>
+        <a href="signup.html" class="sign-up">Sign Up</a>
+      </div>
+      
+    </nav>
+  </header>
+
+  <main class="login-container">
+    <div class="login-card">
+      <h2>Sign In</h2>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+        <p class="message">Don't have an account? <a href="signup.html">Sign up</a></p>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="footer-logo">
+          <img src="ROCKET.png" alt="Rocket Food Logo" />
+          <h2>Rocket Food</h2>
+        </a>
+        <div class="download-buttons">
+          <a href="https://www.apple.com/app-store/"><img src="appstore.png" alt="Download on the App Store" /></a>
+          <a href="https://play.google.com/store/games?device=windows"><img src="playstore.png" alt="Get it on Google Play" /></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Investors</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Partner with us</h3>
+          <ul>
+            <li><a href="restaurants.html">For restaurants</a></li>
+            <li><a href="#">For couriers</a></li>
+            <li><a href="#">For businesses</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow us</h3>
+          <div class="social-icons">
+            <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="linkedin.png" alt="LinkedIn" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Rocket Food. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="signin.js"></script>
+  
+</body>
+</html>

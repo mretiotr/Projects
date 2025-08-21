@@ -1,0 +1,134 @@
+<!-- favorites.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favoritët</title>
+  <link rel="stylesheet" href="style-cart-favorites-reviews.css" />
+</head>
+<body>
+  <header>
+    <nav>
+        <a href="index.html" class="logo">
+          <img src="ROCKET.png" alt="logo" />
+          <span>ROCKET FOOD</span>
+        </a>
+  
+        <ul class="nav-links">
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="restaurants.html">Restaurants</a></li>
+          <li><a href="delivery.html">Delivery</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contacts</a></li>
+        </ul>
+  
+        <div class="auth-buttons">
+          <a href="signin.html" class="sign-in">Sign In</a>
+          <a href="signup.html" class="sign-up">Sign Up</a>
+        </div>
+        
+  
+        <div class="menu-toggle">&#9776;</div> <!-- Ikona e menu hamburger -->
+      </nav>
+  </header>
+
+  <main class="menu-section">
+    <h1>Ushqimet e preferuara</h1>
+    <div id="favorites-container" class="menu-grid"></div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+        <div class="footer-top">
+          <a href="index.html" class="footer-logo">
+            <img src="ROCKET.png" alt="Rocket Food Logo" />
+            <h2>Rocket Food</h2>
+          </a>
+          <div class="download-buttons">
+            <a href="#"><img src="appstore.png" alt="App Store" /></a>
+            <a href="#"><img src="playstore.png" alt="Google Play" /></a>
+          </div>
+        </div>
+  
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Investors</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+              <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+              <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+              <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <p>© 2025 Rocket Food. All rights reserved.</p>
+        </div>
+      </div>
+  </footer>
+
+  <script>
+    const allItems = [
+      { id: "1", name: "Pizza Prosciutto", price: 700, img: "img/pizza.jpg" },
+      { id: "2", name: "Sallatë Ceaser", price: 500, img: "img/sallate.jpg" },
+      { id: "3", name: "Sushi Mix", price: 1200, img: "img/sushi.jpg" },
+      { id: "4", name: "Burger BBQ", price: 750, img: "img/burger.jpg" },
+      { id: "5", name: "Doner Kebab", price: 400, img: "img/doner.jpg" }
+    ];
+
+    function loadFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const container = document.getElementById('favorites-container');
+      container.innerHTML = '';
+
+      if (favorites.length === 0) {
+        container.innerHTML = '<p style="text-align:center;">Nuk keni ushqime të preferuara.</p>';
+        return;
+      }
+
+      favorites.forEach(id => {
+        const item = allItems.find(i => i.id === id);
+        if (item) {
+          const card = document.createElement('div');
+          card.className = 'menu-item';
+          card.innerHTML = `
+            <img src="${item.img}" alt="${item.name}" />
+            <div class="menu-content">
+              <h3>${item.name}</h3>
+              <p>Çmimi: ${item.price} L</p>
+              <button onclick="removeFavorite('${item.id}')">Hiq nga favoritët</button>
+            </div>
+          `;
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function removeFavorite(id) {
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favorites = favorites.filter(favId => favId !== id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      loadFavorites();
+    }
+
+    loadFavorites();
+  </script>
+</body>
+</html>
