@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shporta - Rocket Food</title>
+  <link rel="stylesheet" href="cart.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="ROCKET.png" alt="logo">
+        <span>ROCKET FOOD</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="restaurants.html">Restaurants</a></li>
+        <li><a href="delivery.html">Delivery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="signin.html" class="sign-in">Sign In</a>
+        <a href="signup.html" class="sign-up">Sign Up</a>
+      </div>
+      <a href="cart.html" class="cart-icon">
+        <img src="cart.png" alt="Cart" style="width: 30px; margin-left: 20px;">
+      </a>
+      <div class="menu-toggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <main class="menu-section">
+    <h1>Shporta Juaj</h1>
+    <div id="cart-items" class="cart-list"></div>
+    <div id="cart-total" class="cart-total">Totali: 0 Lekë</div>
+    <button class="checkout-btn">Përfundo Porosinë</button>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="footer-logo">
+          <img src="ROCKET.png" alt="Rocket Food Logo" />
+          <h2>Rocket Food</h2>
+        </a>
+        <div class="download-buttons">
+          <a href="https://www.apple.com/app-store/"><img src="appstore.png" alt="Download on the App Store" /></a>
+          <a href="https://play.google.com/store/games?device=windows"><img src="playstore.png" alt="Get it on Google Play" /></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Investors</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Partner with us</h3>
+          <ul>
+            <li><a href="restaurants.html">For restaurants</a></li>
+            <li><a href="#">For couriers</a></li>
+            <li><a href="#">For businesses</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow us</h3>
+          <div class="social-icons">
+            <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="linkedin.png" alt="LinkedIn" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Rocket Food. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const cartContainer = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let total = 0;
+
+      cartContainer.innerHTML = cart.map(item => {
+        total += item.price * item.quantity;
+        return `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-img">
+            <div>
+              <h4>${item.name}</h4>
+              <p>${item.description}</p>
+              <strong>${item.price} Lekë</strong>
+              <div class="cart-actions">
+                <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                <button class="delete-btn" onclick="deleteItem(${item.id})">
+                  <img src="delete.png" alt="Delete">
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      cartTotal.textContent = `Totali: ${total} Lekë`;
+    }
+
+    function updateQuantity(id, change) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = cart.map(item => {
+        if (item.id === id) {
+          item.quantity = Math.max(1, item.quantity + change);
+        }
+        return item;
+      });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function deleteItem(id) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    renderCart();
+
+    document.querySelector('.checkout-btn').addEventListener('click', () => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  if (cart.length === 0) {
+    alert("Shporta është bosh!");
+    return;
+  }
+
+  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  // Zëvendëso me të dhënat reale nëse ke një formë për emër/email
+  const orderData = {
+    name: "Andi",
+    email: "Andi@example.com",
+    items: cart,
+    total_price: total
+  };
+
+  fetch('http://localhost:3000/api/order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(orderData)
+  })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message);
+      localStorage.removeItem('cart'); // pastro shportën pas porosisë
+      renderCart(); // rifresko shportën
+    })
+    .catch(err => {
+      console.error("Gabim në dërgimin e porosisë:", err);
+      alert("Gabim gjatë dërgimit të porosisë.");
+    });
+});
+
+  </script>
+</body>
+</html>

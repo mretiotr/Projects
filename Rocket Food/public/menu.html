@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rocket Food - Menu</title>
+  <link rel="stylesheet" href="menu.css">
+  <style>
+    .menu-section { max-width: 1200px; margin: auto; padding: 40px 20px; }
+    .menu-category { margin-bottom: 60px; }
+    .menu-category h2 { font-size: 28px; margin-bottom: 20px; color: #4a90e2; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .menu-item {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      transition: box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .menu-item img { width: 100%; height: 180px; object-fit: cover; }
+    .menu-content { padding: 15px; text-align: center; }
+    .menu-content h3 { color: #e74c3c; margin-bottom: 5px; }
+    .menu-content p { font-size: 14px; color: #555; }
+    .price { font-weight: bold; margin: 10px 0; }
+    .quantity-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .quantity-controls button {
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .quantity-controls span { min-width: 20px; text-align: center; display: inline-block; }
+    .add-to-cart {
+      background: #e67e22;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="ROCKET.png" alt="logo">
+        <span>ROCKET FOOD</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="restaurants.html">Restaurants</a></li>
+        <li><a href="delivery.html">Delivery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="signin.html" class="sign-in">Sign In</a>
+        <a href="signup.html" class="sign-up">Sign Up</a>
+      </div>
+      <a href="cart.html" class="cart-icon">
+        <img src="cart.png" alt="Cart" style="width: 30px; margin-left: 20px;">
+      </a>
+      <div class="menu-toggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <main class="menu-section">
+    <section class="menu-category" id="fastfood">
+      <h2>Fast Food</h2>
+      <div class="menu-grid" id="fastfood-items"></div>
+    </section>
+    <section class="menu-category" id="pizza">
+      <h2>Pica</h2>
+      <div class="menu-grid" id="pizza-items"></div>
+    </section>
+    <section class="menu-category" id="hotmeals">
+      <h2>Ushqime të Ngrohta</h2>
+      <div class="menu-grid" id="hotmeals-items"></div>
+    </section>
+    <section class="menu-category" id="drinks">
+      <h2>Pije</h2>
+      <div class="menu-grid" id="drinks-items"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="footer-logo">
+          <img src="ROCKET.png" alt="Rocket Food Logo" />
+          <h2>Rocket Food</h2>
+        </a>
+        <div class="download-buttons">
+          <a href="https://www.apple.com/app-store/"><img src="appstore.png" alt="Download on the App Store" /></a>
+          <a href="https://play.google.com/store/games?device=windows"><img src="playstore.png" alt="Get it on Google Play" /></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Investors</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Partner with us</h3>
+          <ul>
+            <li><a href="restaurants.html">For restaurants</a></li>
+            <li><a href="#">For couriers</a></li>
+            <li><a href="#">For businesses</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow us</h3>
+          <div class="social-icons">
+            <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="linkedin.png" alt="LinkedIn" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Rocket Food. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const items = {
+      fastfood: [
+        { id: 1, name: 'Cheeseburger', description: 'Mish viçi, djathë, bukë', price: 400, image: 'cheeseburger.jpg' },
+        { id: 2, name: 'Hot Dog', description: 'Suxhuk, ketchup, bukë', price: 300, image: 'hotdog.jpg' },
+        { id: 3, name: 'Chicken Wrap', description: 'Pulë, domate, salcë', price: 350, image: 'wrap.jpg' }
+      ],
+      pizza: [
+        { id: 11, name: 'Pizza Margherita', description: 'Djathë & borzilok', price: 500, image: 'pizza-margherita.jpeg' },
+        { id: 12, name: 'Pizza Pepperoni', description: 'Salam pikant', price: 600, image: 'pepperoni.webp' },
+        { id: 13, name: 'Pizza Vegjetariane', description: 'Perime të freskëta', price: 550, image: 'vege.jpeg' }
+      ],
+      hotmeals: [
+        { id: 21, name: 'Oriz me Pulë', description: 'Pulë, oriz & erëza', price: 550, image: 'oriz.jpg' },
+        { id: 22, name: 'Spageti Bolognese', description: 'Makarona, salcë mishi', price: 500, image: 'pasta.jpg' },
+        { id: 23, name: 'Qofte me patate', description: 'Qofte, patate & sallatë', price: 450, image: 'qofte.jpg' }
+      ],
+      drinks: [
+        { id: 31, name: 'Cola', description: '0.5L', price: 150, image: 'cola.jpg' },
+        { id: 32, name: 'Fanta', description: '0.5L', price: 150, image: 'fanta.webp' },
+        { id: 33, name: 'Ujë', description: '0.5L', price: 100, image: 'uje.png' }
+      ]
+    };
+
+    function renderCategory(category, elementId) {
+      const container = document.getElementById(elementId);
+      container.innerHTML = items[category].map(item => `
+        <div class="menu-item">
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="menu-content">
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <div class="price">${item.price} Lekë</div>
+            <div class="quantity-controls">
+              <button onclick="changeQuantity(${item.id}, -1)">-</button>
+              <span id="qty-${item.id}">1</span>
+              <button onclick="changeQuantity(${item.id}, 1)">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart(${item.id}, '${category}')">Shto në Shportë</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function changeQuantity(id, delta) {
+      const span = document.getElementById(`qty-${id}`);
+      let qty = parseInt(span.textContent);
+      qty = Math.max(1, qty + delta);
+      span.textContent = qty;
+    }
+
+    function addToCart(id, category) {
+      const product = items[category].find(item => item.id === id);
+      const qty = parseInt(document.getElementById(`qty-${id}`).textContent);
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existing = cart.find(i => i.id === id);
+
+      if (existing) {
+        existing.quantity += qty;
+      } else {
+        cart.push({ ...product, quantity: qty });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('Produkti u shtua në shportë!');
+    }
+
+    renderCategory('fastfood', 'fastfood-items');
+    renderCategory('pizza', 'pizza-items');
+    renderCategory('hotmeals', 'hotmeals-items');
+    renderCategory('drinks', 'drinks-items');
+  </script>
+</body>
+</html>

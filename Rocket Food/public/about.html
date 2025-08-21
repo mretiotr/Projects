@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Rocket Food</title>
+  <link rel="stylesheet" href="about.css" />
+</head>
+<body>
+
+  <!-- === NAVBAR === -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="ROCKET.png" alt="logo" />
+        <span>ROCKET FOOD</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="restaurants.html">Restaurants</a></li>
+        <li><a href="delivery.html">Delivery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+      </ul>
+
+      <div class="auth-buttons">
+        <a href="signin.html" class="sign-in">Sign In</a>
+        <a href="signup.html" class="sign-up">Sign Up</a>
+      </div>
+      <a href="cart.html" class="cart-icon">
+        <img src="cart.png" alt="Cart" />
+      </a>
+      <div class="menu-toggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <!-- === ABOUT SECTION === -->
+  <section class="about-section">
+    <div class="container">
+      <h1 class="main-title">Rreth Nesh</h1>
+      <p class="intro-text">
+        Rocket Food është një platformë e dedikuar për të sjellë ushqimin më të mirë në derën tuaj, në kohë rekord.
+      </p>
+
+      <div class="about-cards">
+        <div class="card">
+          <h2>Misioni</h2>
+          <p>Të ofrojmë shërbimin më të shpejtë dhe më të besueshëm të shpërndarjes së ushqimit në Shqipëri.</p>
+        </div>
+        <div class="card">
+          <h2>Vizioni</h2>
+          <p>Të bëhemi platforma më e dashur për ushqim në Ballkan dhe më gjerë.</p>
+        </div>
+      </div>
+
+      <div class="values-section">
+        <h2>Vlerat tona</h2>
+        <ul class="values-list">
+          <li><span>🚀</span> Shpejtësi dhe efikasitet</li>
+          <li><span>🤝</span> Besueshmëri dhe transparencë</li>
+          <li><span>🌱</span> Kujdes ndaj mjedisit</li>
+          <li><span>💡</span> Inovacion dhe zhvillim</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- === FOOTER === -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="footer-logo">
+          <img src="ROCKET.png" alt="Rocket Food Logo" />
+          <h2>Rocket Food</h2>
+        </a>
+        <div class="download-buttons">
+          <a href="https://www.apple.com/app-store/"><img src="appstore.png" alt="Download on the App Store" /></a>
+          <a href="https://play.google.com/store/games?device=windows"><img src="playstore.png" alt="Get it on Google Play" /></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Investors</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Partner with us</h3>
+          <ul>
+            <li><a href="restaurants.html">For restaurants</a></li>
+            <li><a href="#">For couriers</a></li>
+            <li><a href="#">For businesses</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow us</h3>
+          <div class="social-icons">
+            <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="linkedin.png" alt="LinkedIn" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Rocket Food. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.querySelector(".menu-toggle").addEventListener("click", () => {
+      document.querySelector(".nav-links").classList.toggle("active");
+    });
+  </script>
+  
+</body>
+</html>

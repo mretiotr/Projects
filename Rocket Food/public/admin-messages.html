@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mesazhet e Kontaktit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4a90e2;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #4a90e2;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover {
+      background: #f1f1f1;
+    }
+
+    .no-messages {
+      text-align: center;
+      margin-top: 30px;
+      font-style: italic;
+      color: #666;
+    }
+
+    button {
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e60000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mesazhet nga Forma e Kontaktit</h1>
+
+  <table id="messages-table" style="display:none;">
+    <thead>
+      <tr>
+        <th>Emri</th>
+        <th>Email</th>
+        <th>Mesazhi</th>
+        <th>Dërguar më</th>
+        <th>Fshi</th>
+      </tr>
+    </thead>
+    <tbody id="message-table-body">
+      <!-- Mesazhet do të shfaqen këtu -->
+    </tbody>
+  </table>
+
+  <p class="no-messages" id="noMessages">Nuk ka ende mesazhe të ardhura.</p>
+
+  <script>
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Duhet të jeni i loguar si admin.");
+      document.body.innerHTML = "<p style='text-align:center;color:red;'>Qasja e ndaluar.</p>";
+      throw new Error("Token mungon");
+    }
+
+    function loadMessages() {
+      fetch("http://localhost:3000/api/contact", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Akses i ndaluar");
+        return res.json();
+      })
+      .then(data => {
+        const table = document.getElementById("messages-table");
+        const noMsg = document.getElementById("noMessages");
+        const tbody = document.getElementById("message-table-body");
+
+        tbody.innerHTML = "";
+
+        if (data.length === 0) {
+          table.style.display = "none";
+          noMsg.style.display = "block";
+        } else {
+          table.style.display = "table";
+          noMsg.style.display = "none";
+
+          data.forEach(msg => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${msg.name}</td>
+              <td>${msg.email}</td>
+              <td>${msg.message}</td>
+              <td>${new Date(msg.created_at).toLocaleString()}</td>
+              <td><button onclick="deleteMessage(${msg.id})">Fshi</button></td>
+            `;
+            tbody.appendChild(row);
+          });
+        }
+      })
+      .catch(err => {
+        console.error("Gabim:", err);
+        document.body.innerHTML = "<p style='text-align:center;color:red;'>Nuk keni akses në këtë faqe.</p>";
+      });
+    }
+
+    function deleteMessage(id) {
+      if (confirm("A jeni i sigurt që doni ta fshini këtë mesazh?")) {
+        fetch(`http://localhost:3000/api/contact/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message);
+          loadMessages();
+        })
+        .catch(err => {
+          console.error("Gabim gjatë fshirjes:", err);
+          alert("Fshirja dështoi.");
+        });
+      }
+    }
+
+    loadMessages();
+  </script>
+</body>
+</html>

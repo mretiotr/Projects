@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Na Kontakto</title>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="ROCKET.png" alt="logo">
+        <span>ROCKET FOOD</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="restaurants.html">Restaurants</a></li>
+        <li><a href="delivery.html">Delivery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="signin.html" class="sign-in">Sign In</a>
+        <a href="signup.html" class="sign-up">Sign Up</a>
+      </div>
+      <a href="cart.html" class="cart-icon">
+        <img src="cart.png" alt="Cart" />
+      </a>
+      <div class="menu-toggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <main class="contact-container">
+    <h1>Na Kontakto</h1>
+    <p>Na dërgo një mesazh dhe do të të përgjigjemi sa më shpejt.</p>
+
+    <form class="contact-form">
+      <input type="text" id="name" placeholder="Emri juaj" required />
+      <input type="email" id="email" placeholder="Email-i juaj" required />
+      <textarea id="message" rows="5" placeholder="Mesazhi juaj" required></textarea>
+      <button type="submit">Dërgo Mesazhin</button>
+    </form>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="footer-logo">
+          <img src="ROCKET.png" alt="Rocket Food Logo" />
+          <h2>Rocket Food</h2>
+        </a>
+        <div class="download-buttons">
+          <a href="https://www.apple.com/app-store/"><img src="appstore.png" alt="Download on the App Store" /></a>
+          <a href="https://play.google.com/store/games?device=windows"><img src="playstore.png" alt="Get it on Google Play" /></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Investors</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Partner with us</h3>
+          <ul>
+            <li><a href="restaurants.css">For restaurants</a></li>
+            <li><a href="#">For couriers</a></li>
+            <li><a href="#">For businesses</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow us</h3>
+          <div class="social-icons">
+            <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="linkedin.png" alt="LinkedIn" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Rocket Food. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: Submit handler -->
+  <script>
+    document.querySelector(".menu-toggle").addEventListener("click", () => {
+      document.querySelector(".nav-links").classList.toggle("active");
+    });
+
+    document.querySelector(".contact-form").addEventListener("submit", function (e) {
+      e.preventDefault(); // ndalon rifreskimin e faqes
+
+      const name = document.querySelector("#name").value.trim();
+      const email = document.querySelector("#email").value.trim();
+      const message = document.querySelector("#message").value.trim();
+
+      if (!name || !email || !message) {
+        alert("Ju lutem plotësoni të gjitha fushat.");
+        return;
+      }
+
+      fetch("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        document.querySelector(".contact-form").reset(); // pastro formularin
+      })
+      .catch(err => {
+        alert("Dështoi dërgimi i mesazhit.");
+        console.error(err);
+      });
+    });
+  </script>
+  
+<script src="contact.js"></script>
+
+
+</body>
+</html>
