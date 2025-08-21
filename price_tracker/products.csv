@@ -1,0 +1,2 @@
+name,url,selector,currency,target_price
+Attic Book,https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html,p.price_color,£,30.00
